@@ -12,7 +12,7 @@ interface Props {
 const { project, index } = Astro.props;
 const titleId = `judul-${project.id}`;
 const heading = `${index + 1} — ${project.name}`;
-const deckHref = proyekHref(project.id, import.meta.env.BASE_URL);
+const deckHref = proyekHref(project.id);
 ---
 
 <section

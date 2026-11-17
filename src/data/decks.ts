@@ -318,6 +318,4 @@ export function getDeck(id: string) {
   return decks.find((deck) => deck.id === id);
 }
 
-export function proyekHref(id: string, base: string) {
-  return `${base}proyek/${id}/`;
-}
+export { proyekHref } from '../lib/paths';

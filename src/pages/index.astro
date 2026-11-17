@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectBand from '../components/landing/ProjectBand.astro';
 import { projects } from '../data/projects';
+import { withBase } from '../lib/paths';
 import { proyekHref } from '../data/decks';
 
 const title = 'Dafa Fawaz Fachriza Rahman — Pemrograman Mobile II';
 const description =
   'Situs GitHub Pages: Identitas Mahasiswa dan tautan ke Proyek mata kuliah Pemrograman Mobile II. Aplikasi dikerjakan dengan bantuan Google AI Studio.';
-const base = import.meta.env.BASE_URL;
+const homeHref = withBase();
 const github = 'https://github.com/Fahriza253';
 ---
 
@@ -21,7 +22,7 @@ const github = 'https://github.com/Fahriza253';
 
   <header class="site-header sticky top-0 z-40 border-b border-line bg-canvas/95 backdrop-blur">
     <div class="site-gutter mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 py-2 md:py-3">
-      <a href={base} class="shrink-0 text-sm font-semibold tracking-tight">Recap</a>
+      <a href={homeHref} class="shrink-0 text-sm font-semibold tracking-tight">Recap</a>
       <nav aria-label="Bagian halaman" class="flex min-w-0 flex-wrap items-center justify-end gap-x-0 gap-y-1 text-sm">
         <a class="inline-flex min-h-11 cursor-pointer items-center px-2.5 text-muted transition-colors duration-200 hover:text-ink md:px-3" href="#identitas">Identitas</a>
         <a class="inline-flex min-h-11 cursor-pointer items-center px-2.5 text-muted transition-colors duration-200 hover:text-ink md:px-3" href="#proyek">Proyek</a>
@@ -139,7 +140,7 @@ const github = 'https://github.com/Fahriza253';
             projects.map((project, index) => (
               <li>
                 <a
-                  href={proyekHref(project.id, base)}
+                  href={proyekHref(project.id)}
                   class="group flex min-h-16 min-w-0 cursor-pointer items-baseline justify-between gap-3 py-5 md:gap-6"
                 >
                   <span class="shrink-0 text-sm text-muted">0{index + 1}</span>

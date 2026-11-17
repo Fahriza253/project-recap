@@ -2,13 +2,14 @@
 import { Image } from 'astro:assets';
 import type { ProjectDeck as Deck } from '../../data/decks';
 import { decks, proyekHref } from '../../data/decks';
+import { withBase } from '../../lib/paths';
 
 interface Props {
   deck: Deck;
 }
 
 const { deck } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const homeHref = withBase();
 const index = decks.findIndex((item) => item.id === deck.id);
 const prevDeck = index > 0 ? decks[index - 1] : undefined;
 const nextDeck = index < decks.length - 1 ? decks[index + 1] : undefined;
@@ -61,7 +62,7 @@ const nextDeck = index < decks.length - 1 ? decks[index + 1] : undefined;
   </div>
 
   <nav class="z-20 flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface px-4 py-3" aria-label="Navigasi slide">
-    <a href={base} class="inline-flex min-h-11 cursor-pointer items-center text-sm text-muted hover:text-ink">
+    <a href={homeHref} class="inline-flex min-h-11 cursor-pointer items-center text-sm text-muted hover:text-ink">
       Beranda
     </a>
     <div class="flex items-center gap-2">
@@ -86,14 +87,14 @@ const nextDeck = index < decks.length - 1 ? decks[index + 1] : undefined;
     <div class="flex min-h-11 items-center gap-4 text-sm">
       {
         prevDeck && (
-          <a class="text-muted hover:text-ink" href={proyekHref(prevDeck.id, base)}>
+          <a class="text-muted hover:text-ink" href={proyekHref(prevDeck.id)}>
             {prevDeck.name}
           </a>
         )
       }
       {
         nextDeck && (
-          <a class="text-muted hover:text-ink" href={proyekHref(nextDeck.id, base)}>
+          <a class="text-muted hover:text-ink" href={proyekHref(nextDeck.id)}>
             {nextDeck.name}
           </a>
         )

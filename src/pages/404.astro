@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
 
 const title = 'Halaman tidak ditemukan';
 const description = 'Halaman yang diminta tidak ada pada Situs Portofolio Pemrograman Mobile II.';
-const homeHref = import.meta.env.BASE_URL;
+const homeHref = withBase();
 ---
 
 <BaseLayout title={title} description={description}>
