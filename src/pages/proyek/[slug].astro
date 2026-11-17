@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDeck from '../../components/deck/ProjectDeck.astro';
+import { decks } from '../../data/decks';
+
+export function getStaticPaths() {
+  return decks.map((deck) => ({
+    params: { slug: deck.id },
+    props: { deck },
+  }));
+}
+
+const { deck } = Astro.props;
+const title = `${deck.name} — Pemrograman Mobile II`;
+const identitas = deck.slides[0];
+const description = identitas.kind === 'identitas' ? identitas.body : deck.name;
+---
+
+<BaseLayout title={title} description={description} chrome="deck">
+  <ProjectDeck deck={deck} />
+</BaseLayout>

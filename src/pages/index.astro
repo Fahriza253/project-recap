@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectBand from '../components/landing/ProjectBand.astro';
+import { projects } from '../data/projects';
+import { proyekHref } from '../data/decks';
+
+const title = 'Dafa Fawaz Fachriza Rahman — Pemrograman Mobile II';
+const description =
+  'Situs GitHub Pages: Identitas Mahasiswa dan tautan ke Proyek mata kuliah Pemrograman Mobile II. Aplikasi dikerjakan dengan bantuan Google AI Studio.';
+const base = import.meta.env.BASE_URL;
+const github = 'https://github.com/Fahriza253';
+---
+
+<BaseLayout title={title} description={description}>
+  <a
+    href="#konten"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-lime focus:px-4 focus:py-2 focus:text-lime-ink"
+  >
+    Loncat ke konten
+  </a>
+
+  <header class="site-header sticky top-0 z-40 border-b border-line bg-canvas/95 backdrop-blur">
+    <div class="site-gutter mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-3 gap-y-2 py-2 md:py-3">
+      <a href={base} class="shrink-0 text-sm font-semibold tracking-tight">Recap</a>
+      <nav aria-label="Bagian halaman" class="flex min-w-0 flex-wrap items-center justify-end gap-x-0 gap-y-1 text-sm">
+        <a class="inline-flex min-h-11 cursor-pointer items-center px-2.5 text-muted transition-colors duration-200 hover:text-ink md:px-3" href="#identitas">Identitas</a>
+        <a class="inline-flex min-h-11 cursor-pointer items-center px-2.5 text-muted transition-colors duration-200 hover:text-ink md:px-3" href="#proyek">Proyek</a>
+        <a class="inline-flex min-h-11 cursor-pointer items-center px-2.5 text-muted transition-colors duration-200 hover:text-ink md:px-3" href={github}>GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="konten">
+    <section class="site-gutter relative min-h-[75dvh] overflow-hidden md:min-h-[85dvh]" aria-labelledby="judul-hero">
+      <div
+        class="pointer-events-none absolute inset-0 opacity-40"
+        style="background: radial-gradient(80% 60% at 70% 20%, #1f2a0a 0%, transparent 55%), radial-gradient(50% 40% at 10% 80%, #182033 0%, transparent 50%);"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="relative mx-auto flex min-h-[75dvh] max-w-6xl min-w-0 flex-col justify-end pb-12 pt-20 md:min-h-[85dvh] md:justify-center md:pb-24 md:pt-24">
+        <p class="text-xs font-semibold tracking-[0.22em] text-muted uppercase">Pemrograman Mobile II</p>
+        <h1 id="judul-hero" class="mt-6 max-w-5xl min-w-0 text-[2rem] leading-[1.05] font-semibold tracking-tight break-words sm:text-5xl sm:leading-[0.95] md:text-7xl lg:text-8xl">
+          Dafa Fawaz Fachriza Rahman
+        </h1>
+        <p class="mt-6 max-w-xl text-base text-muted md:text-xl">
+          Mahasiswa S1 Teknik Informatika, Universitas Putra Indonesia Cianjur.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
+          <a
+            href="#proyek"
+            class="inline-flex min-h-11 cursor-pointer items-center rounded-lg bg-lime px-5 text-sm font-semibold text-lime-ink transition-opacity duration-200 hover:opacity-90"
+          >
+            Lihat Proyek
+          </a>
+          <a
+            href={github}
+            class="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-line px-5 text-sm font-medium text-ink transition-colors duration-200 hover:border-lime"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="identitas" class="scroll-mt-[calc(5.5rem+env(safe-area-inset-top,0px))] border-t border-line" aria-labelledby="judul-identitas" data-reveal>
+      <div class="mx-auto grid max-w-6xl grid-cols-1 lg:grid-cols-2">
+        <div class="site-gutter flex items-end bg-elevated py-10 md:min-h-[28rem] md:px-12 md:py-12">
+          <p class="max-w-sm text-sm tracking-[0.18em] text-muted uppercase">Identitas</p>
+        </div>
+        <div class="site-gutter py-12 md:px-12 md:py-16">
+          <h2 id="judul-identitas" class="text-3xl font-semibold tracking-tight break-words md:text-5xl">
+            Fakta yang dipakai di Sampul
+          </h2>
+          <dl class="mt-10 space-y-6 text-base">
+            <div>
+              <dt class="text-xs tracking-[0.18em] text-muted uppercase">Nama</dt>
+              <dd class="mt-1">Dafa Fawaz Fachriza Rahman</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.18em] text-muted uppercase">Program studi</dt>
+              <dd class="mt-1">S1 Teknik Informatika</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.18em] text-muted uppercase">Kampus</dt>
+              <dd class="mt-1">Universitas Putra Indonesia Cianjur</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.18em] text-muted uppercase">Mata kuliah</dt>
+              <dd class="mt-1">Pemrograman Mobile II</dd>
+            </div>
+            <div>
+              <dt class="text-xs tracking-[0.18em] text-muted uppercase">GitHub</dt>
+              <dd class="mt-1">
+                <a class="inline-block min-w-0 wrap-anywhere underline decoration-line underline-offset-4 hover:decoration-lime" href={github}>github.com/Fahriza253</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-gutter flex items-center border-t border-line py-16 md:min-h-[70dvh] md:py-24" aria-labelledby="judul-kutipan" data-reveal>
+      <figure class="mx-auto max-w-4xl min-w-0">
+        <blockquote id="judul-kutipan" class="text-3xl leading-tight font-semibold tracking-tight break-words md:text-6xl">
+          <span class="block text-lime" aria-hidden="true">“</span>
+          Build with AI. Keep the work yours.
+        </blockquote>
+        <figcaption class="mt-8 text-sm tracking-[0.16em] text-muted uppercase">
+          Praktik pembangunan dengan Google AI Studio
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="site-gutter border-t border-line py-16 md:py-28" aria-labelledby="judul-studio" data-reveal>
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-10 md:gap-12 lg:grid-cols-2">
+        <div class="min-w-0">
+          <span class="mb-6 block h-1 w-10 bg-lime" aria-hidden="true"></span>
+          <h2 id="judul-studio" class="text-2xl font-semibold tracking-tight break-words md:text-4xl">
+            Setiap aplikasi di Situs ini dikerjakan dengan bantuan Google AI Studio.
+          </h2>
+          <p class="mt-6 max-w-xl text-base leading-relaxed text-muted">
+            Google AI Studio dipakai sebagai alat bantu menulis dan merakit antarmuka. Fakta tiap Proyek tetap diambil dari Recap; Situs ini hanya menampilkan Identitas dan tautan ke Proyek yang sudah selesai.
+          </p>
+        </div>
+        <div class="lg:pt-8">
+          <p class="text-5xl font-semibold tracking-tight md:text-8xl">{projects.length}</p>
+          <p class="mt-3 text-lg text-muted">Proyek pada mata kuliah ini</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyek" class="site-gutter scroll-mt-[calc(5.5rem+env(safe-area-inset-top,0px))] border-t border-line py-16" aria-labelledby="judul-proyek">
+      <div class="mx-auto max-w-6xl min-w-0">
+        <p class="text-xs font-semibold tracking-[0.2em] text-muted uppercase">Indeks</p>
+        <h2 id="judul-proyek" class="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">Proyek</h2>
+        <ul class="mt-10 divide-y divide-line border-y border-line">
+          {
+            projects.map((project, index) => (
+              <li>
+                <a
+                  href={proyekHref(project.id, base)}
+                  class="group flex min-h-16 min-w-0 cursor-pointer items-baseline justify-between gap-3 py-5 md:gap-6"
+                >
+                  <span class="shrink-0 text-sm text-muted">0{index + 1}</span>
+                  <span class="min-w-0 flex-1 text-lg font-semibold tracking-tight break-words group-hover:text-lime md:text-2xl">
+                    {project.name}
+                  </span>
+                  <span class="hidden text-sm text-muted md:inline">{project.kicker}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    {projects.map((project, index) => <ProjectBand project={project} index={index} />)}
+
+    <section class="site-gutter border-t border-line bg-lime py-16 text-lime-ink" aria-labelledby="judul-github">
+      <div class="mx-auto flex max-w-6xl min-w-0 flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <h2 id="judul-github" class="text-3xl font-semibold tracking-tight break-words md:text-5xl">
+          Kode dan Identitas ada di GitHub
+        </h2>
+        <a
+          href={github}
+          class="inline-flex min-h-11 min-w-0 max-w-full cursor-pointer items-center border-b-2 border-lime-ink text-lg font-semibold break-all md:text-xl"
+        >
+          github.com/Fahriza253 →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-gutter site-footer border-t border-line py-10">
+    <div class="mx-auto flex max-w-6xl min-w-0 flex-col gap-3 text-sm text-muted md:flex-row md:items-center md:justify-between">
+      <p>Dafa Fawaz Fachriza Rahman · Pemrograman Mobile II</p>
+      <p>Situs GitHub Pages. Deck per Proyek di tautan indeks.</p>
+    </div>
+  </footer>
+
+  <script>
+    import '../scripts/landing.ts';
+  </script>
+</BaseLayout>

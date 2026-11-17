@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import type { ProjectDeck as Deck } from '../../data/decks';
+import { decks, proyekHref } from '../../data/decks';
+
+interface Props {
+  deck: Deck;
+}
+
+const { deck } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const index = decks.findIndex((item) => item.id === deck.id);
+const prevDeck = index > 0 ? decks[index - 1] : undefined;
+const nextDeck = index < decks.length - 1 ? decks[index + 1] : undefined;
+---
+
+<div class="deck-root">
+  <div class="deck-stage">
+    <div class="deck-frame">
+      {
+        deck.slides.map((slide, slideIndex) =>
+          slide.kind === 'identitas' ? (
+            <section
+              class:list={['deck-slide', 'deck-identitas', slideIndex === 0 && 'is-active']}
+              data-deck-slide
+              aria-label={slide.title}
+              aria-hidden={slideIndex === 0 ? 'false' : 'true'}
+            >
+              <p class="text-xs font-semibold tracking-[0.2em] text-muted uppercase">Slide identitas</p>
+              <h1 class="max-w-4xl text-4xl font-semibold tracking-tight md:text-6xl">{slide.title}</h1>
+              <p class="max-w-3xl text-base leading-relaxed text-muted md:text-lg">{slide.body}</p>
+            </section>
+          ) : (
+            <section
+              class="deck-slide deck-bukti"
+              data-deck-slide
+              aria-label={slide.title}
+              aria-hidden="true"
+            >
+              <div class="deck-shot">
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  widths={[480, 800, 1200, 1600]}
+                  sizes="(min-width: 768px) 58vw, 100vw"
+                  class="max-h-full max-w-full"
+                />
+                <button type="button" class="deck-shot-open" data-deck-open>
+                  Lihat screenshot
+                </button>
+              </div>
+              <div class="deck-caption">
+                <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">{slide.title}</h2>
+                <p class="mt-5 text-base leading-relaxed text-muted">{slide.body}</p>
+              </div>
+            </section>
+          ),
+        )
+      }
+    </div>
+  </div>
+
+  <nav class="z-20 flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface px-4 py-3" aria-label="Navigasi slide">
+    <a href={base} class="inline-flex min-h-11 cursor-pointer items-center text-sm text-muted hover:text-ink">
+      Beranda
+    </a>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-deck-prev
+        class="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-line px-4 text-sm"
+        aria-label="Sebelumnya"
+      >
+        Sebelumnya
+      </button>
+      <p data-deck-counter class="min-w-16 text-center text-sm text-muted">1 / {deck.slides.length}</p>
+      <button
+        type="button"
+        data-deck-next
+        class="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-line px-4 text-sm"
+        aria-label="Berikutnya"
+      >
+        Berikutnya
+      </button>
+    </div>
+    <div class="flex min-h-11 items-center gap-4 text-sm">
+      {
+        prevDeck && (
+          <a class="text-muted hover:text-ink" href={proyekHref(prevDeck.id, base)}>
+            {prevDeck.name}
+          </a>
+        )
+      }
+      {
+        nextDeck && (
+          <a class="text-muted hover:text-ink" href={proyekHref(nextDeck.id, base)}>
+            {nextDeck.name}
+          </a>
+        )
+      }
+    </div>
+  </nav>
+</div>
+
+<div class="deck-lightbox" data-deck-lightbox hidden>
+  <div class="flex justify-end p-4">
+    <button
+      type="button"
+      data-deck-lightbox-close
+      class="inline-flex min-h-11 cursor-pointer items-center rounded-lg border border-line px-4 text-sm"
+    >
+      Tutup
+    </button>
+  </div>
+  <img data-deck-lightbox-img alt="" />
+</div>
+
+<p class="sr-only" data-deck-live aria-live="polite"></p>
+
+<script>
+  import '../../scripts/deck.ts';
+</script>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fahriza253.github.io/project-recap/sitemap-index.xml

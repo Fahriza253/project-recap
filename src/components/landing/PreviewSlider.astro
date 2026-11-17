@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import type { Slide } from '../../data/projects';
+
+interface Props {
+  slides: Slide[];
+  labelledBy: string;
+  frame?: 'plain' | 'browser' | 'phone';
+}
+
+const { slides, labelledBy, frame = 'plain' } = Astro.props;
+const sliderId = `${labelledBy}-slider`;
+---
+
+<div
+  class="min-w-0 outline-none"
+  data-slider
+  role="region"
+  aria-roledescription="carousel"
+  aria-labelledby={labelledBy}
+  tabindex="0"
+>
+  <div class="mb-4 flex min-w-0 items-center justify-between gap-3">
+    <p class="text-sm text-muted" data-slider-status aria-live="polite">1 / {slides.length}</p>
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-prev
+        class="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-line text-ink transition-colors duration-200 hover:border-lime hover:text-lime"
+        aria-controls={sliderId}
+        aria-label="Pratinjau sebelumnya"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <path d="M15 6 9 12l6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        data-next
+        class="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-line text-ink transition-colors duration-200 hover:border-lime hover:text-lime"
+        aria-controls={sliderId}
+        aria-label="Pratinjau berikutnya"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id={sliderId}
+    class:list={[
+      'slider-track flex min-w-0 snap-x snap-mandatory overflow-x-auto',
+      frame === 'phone' ? 'gap-4' : '',
+    ]}
+    data-slider-track
+  >
+    {
+      slides.map((slide) => (
+        <figure
+          class:list={[
+            'min-w-full w-full shrink-0 snap-start',
+            frame === 'phone' ? 'flex justify-center' : '',
+          ]}
+          data-slide
+        >
+          {frame === 'browser' && (
+            <div class="overflow-hidden rounded-xl border border-line bg-elevated">
+              <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+                <span class="h-2.5 w-2.5 rounded-full bg-line" aria-hidden="true"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-line" aria-hidden="true"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-line" aria-hidden="true"></span>
+                <span class="ml-3 truncate text-xs text-muted">{slide.alt}</span>
+              </div>
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                widths={[480, 800, 1200]}
+                sizes="(min-width: 1024px) 52vw, 100vw"
+                class="h-auto w-full"
+              />
+            </div>
+          )}
+          {frame === 'phone' && (
+            <div class="w-[min(100%,280px)] overflow-hidden rounded-[2rem] border-[10px] border-zinc-900 bg-black shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                widths={[280, 420]}
+                sizes="280px"
+                class="h-auto w-full"
+              />
+            </div>
+          )}
+          {frame === 'plain' && (
+            <div class="overflow-hidden rounded-xl border border-line bg-elevated">
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                widths={[480, 800, 1200]}
+                sizes="(min-width: 1024px) 48vw, 100vw"
+                class="h-auto w-full"
+              />
+            </div>
+          )}
+        </figure>
+      ))
+    }
+  </div>
+
+  <div class="mt-4 flex flex-wrap justify-center gap-1">
+    {
+      slides.map((_, i) => (
+        <button
+          type="button"
+          data-slider-dot
+          class="inline-flex h-11 w-11 cursor-pointer items-center justify-center"
+          aria-label={`Pratinjau ${i + 1}`}
+          aria-current={i === 0 ? 'true' : undefined}
+        >
+          <span data-slider-dot-mark class="h-2.5 w-2.5 rounded-full bg-line" aria-hidden="true"></span>
+        </button>
+      ))
+    }
+  </div>
+</div>

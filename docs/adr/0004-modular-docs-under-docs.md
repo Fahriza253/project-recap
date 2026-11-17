@@ -1,0 +1,5 @@
+# Dokumen markdown di `docs/`, deck di root `index.html`
+
+Root repositori hanya berisi titik masuk (`README.md`, `AGENTS.md`, `LICENSE`, `index.html`, konfigurasi). Glosarium, panduan penulisan, profil Mahasiswa, dan Recap per Proyek hidup di bawah `docs/` dengan subfolder modular (`domain/`, `guides/`, `profile/`, `project_*/`, `adr/`, `agents/`). Portofolio Deck dibuka lewat `index.html` di root; screenshot Recap tetap di `docs/project_*/` dengan path relatif `docs/project_...` dari berkas HTML itu.
+
+Alasan: root tetap bersih untuk pembaca manusia dan GitHub Pages, sementara semua teks panduan dan fakta kuliah terkumpul di satu pohon `docs/` yang dapat dipetakan per peran. Glosarium tidak lagi di root (menyimpang dari template skill default) supaya konsisten dengan aturan root minimal; agen membaca lokasi dari `docs/agents/domain.md` dan `AGENTS.md`.
